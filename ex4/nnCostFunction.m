@@ -73,7 +73,20 @@ J = sum(sum(pos - neg), 2)/m + reg;
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
-%
+
+d3 = a3 .- Y;
+d2 = (d3 * Theta2) .* sigmoidGradient([ ones(size(z2, 1), 1) z2 ]);
+d2 = d2(:, 2:end);
+
+D2 = d3' * a2;
+D1 = d2' * a1;
+
+p2 = (lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
+p1 = (lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+
+Theta2_grad = D2 ./ m + p2;
+Theta1_grad = D1 ./ m + p1;
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -82,8 +95,7 @@ J = sum(sum(pos - neg), 2)/m + reg;
 %               and Theta2_grad from Part 2.
 %
 
-
-
+grad = [Theta1_grad(:); Theta2_grad(:)];
 
 
 
