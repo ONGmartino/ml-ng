@@ -13,12 +13,11 @@ centroids = zeros(K, size(X, 2));
 %               the dataset X
 %
 
+    idx = findClosestCentroids(X, centroids);
+    centroids = computeMeans(X, idx, K);
 
-
-
-
-
-
+    randidx = randperm(size(X, 1));
+    centroids  = X(randidx(1:K), :);
 
 % =============================================================
 

@@ -21,11 +21,17 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+for x = 1:size(X, 1)
 
+    z = zeros(K, 1);
 
+    for k = 1:K
+	z(k) = sum((X(x,:) - centroids(k,:)).^2);
+    end
 
+    [trash, idx(x)] = min(z);
 
-
+end
 
 % =============================================================
 
